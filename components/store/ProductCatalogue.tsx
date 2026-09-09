@@ -43,6 +43,7 @@ export function ProductCatalogue({
   onSearchChange: (value: string) => void;
 }) {
   const [products, setProducts] = useState<ProductRow[]>([]);
+  const [categoriesMap, setCategoriesMap] = useState<Record<string, string>>({});
   const [loading, setLoading] = useState(true);
   const [selectedCategories, setSelectedCategories] = useState<string[]>([]);
   const [selectedCollections, setSelectedCollections] = useState<string[]>([]);
@@ -52,7 +53,16 @@ export function ProductCatalogue({
   const [mobileFiltersOpen, setMobileFiltersOpen] = useState(false);
 
   useEffect(() => {
-    async function fetchProducts() {
+    async function fetchProductsAndCategories() {
+      const { data: catData } = await supabase
+        .from('categories')
+        .select('id, name');
+      const catMap: Record<string, string> = {};
+      catData?.forEach((c) => {
+        catMap[c.id] = c.name;
+      });
+      setCategoriesMap(catMap);
+
       const { data, error } = await supabase
         .from('products')
         .select('*')
@@ -63,7 +73,15 @@ export function ProductCatalogue({
       setProducts((data as ProductRow[]) ?? []);
       setLoading(false);
     }
-    fetchProducts();
+    fetchProductsAndCategories();
+
+    if (typeof window !== 'undefined') {
+      const params = new URLSearchParams(window.location.search);
+      const catParam = params.get('category');
+      if (catParam) {
+        setSelectedCategories([catParam]);
+      }
+    }
   }, []);
 
   const toggleCategory = (cat: string) => {
@@ -110,6 +128,10 @@ export function ProductCatalogue({
           p.tags.some((t) => t.toLowerCase().includes(q));
         if (!matches) return false;
       }
+      if (selectedCategories.length > 0) {
+        const catName = p.category_id ? categoriesMap[p.category_id] : null;
+        if (!catName || !selectedCategories.includes(catName)) return false;
+      }
       if (
         selectedCollections.length > 0 &&
         p.collection &&
@@ -154,6 +176,8 @@ export function ProductCatalogue({
   }, [
     products,
     searchQuery,
+    selectedCategories,
+    categoriesMap,
     selectedCollections,
     selectedFabrics,
     inStockOnly,
@@ -162,6 +186,33 @@ export function ProductCatalogue({
 
   const FilterContent = () => (
     <div className="space-y-6">
+      {/* Categories */}
+      <div>
+        <h4 className="text-xs tracking-[0.2em] uppercase text-gold-dark font-medium mb-3">
+          Category
+        </h4>
+        <div className="space-y-2.5">
+          {PRODUCT_CATEGORIES.map((cat) => (
+            <div key={cat} className="flex items-center gap-2.5">
+              <Checkbox
+                id={`cat-${cat}`}
+                checked={selectedCategories.includes(cat)}
+                onCheckedChange={() => toggleCategory(cat)}
+                className="border-gold/40 data-[state=checked]:bg-burgundy data-[state=checked]:border-burgundy"
+              />
+              <Label
+                htmlFor={`cat-${cat}`}
+                className="text-sm text-brown cursor-pointer font-normal hover:text-burgundy transition-colors"
+              >
+                {cat}
+              </Label>
+            </div>
+          ))}
+        </div>
+      </div>
+
+      <Separator className="bg-gold/15" />
+
       {/* Collections */}
       <div>
         <h4 className="text-xs tracking-[0.2em] uppercase text-gold-dark font-medium mb-3">

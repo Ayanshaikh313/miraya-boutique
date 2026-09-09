@@ -26,7 +26,7 @@ export async function CategoriesSection() {
           {categories.map((cat, i) => (
             <Link
               key={cat.id}
-              href="/#catalogue"
+              href={`/?category=${encodeURIComponent(cat.name)}#catalogue`}
               className="group relative overflow-hidden rounded-sm aspect-[4/5] bg-brown animate-fade-in-up"
               style={{ animationDelay: `${i * 80}ms` }}
             >

@@ -13,12 +13,13 @@ import {
 } from '@/components/ui/sheet';
 import { supabase } from '@/lib/supabase-client';
 import type { CategoryRow } from '@/lib/types';
+import { CartDrawer } from './CartDrawer';
 
 const navLinks = [
   { label: 'New Arrivals', href: '/#catalogue' },
-  { label: 'Sarees', href: '/#catalogue' },
-  { label: 'Lehengas', href: '/#catalogue' },
-  { label: 'Bridal', href: '/#catalogue' },
+  { label: 'Sarees', href: '/?category=Sarees#catalogue' },
+  { label: 'Lehengas', href: '/?category=Lehengas#catalogue' },
+  { label: 'Bridal', href: '/?category=Bridal%20Couture#catalogue' },
   { label: 'Collections', href: '/#categories' },
 ];
 
@@ -94,7 +95,7 @@ export function Navbar({
                     {categories.map((cat) => (
                       <SheetClose asChild key={cat.id}>
                         <Link
-                          href="/#catalogue"
+                          href={`/?category=${encodeURIComponent(cat.name)}#catalogue`}
                           className="block px-4 py-2 text-sm text-muted-foreground hover:text-burgundy transition-colors"
                         >
                           {cat.name}
@@ -158,12 +159,7 @@ export function Navbar({
               <User className="h-5 w-5" />
             </Button>
 
-            <Button variant="ghost" size="icon" className="text-brown hover:text-burgundy relative">
-              <ShoppingBag className="h-5 w-5" />
-              <span className="absolute top-1.5 right-1.5 h-4 w-4 rounded-full bg-burgundy text-ivory text-[10px] font-medium flex items-center justify-center">
-                0
-              </span>
-            </Button>
+            <CartDrawer />
           </div>
         </div>
 

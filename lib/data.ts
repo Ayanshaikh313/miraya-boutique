@@ -1,63 +1,75 @@
-import type { Product, Category } from './types';
+import type { ProductRow, CategoryRow } from './types';
 
-export const categories: Category[] = [
+export const categories: CategoryRow[] = [
   {
     id: 'cat-1',
     name: 'Sarees',
     slug: 'sarees',
     description: 'Handwoven drapes of timeless grace — from Banarasi silk to chiffon.',
-    image:
+    image_url:
       'https://images.pexels.com/photos/2723623/pexels-photo-2723623.jpeg?auto=compress&cs=tinysrgb&h=650&w=940',
-    product_count: 48,
+    sort_order: 1,
+    created_at: '2026-08-01T10:00:00Z',
+    updated_at: '2026-08-01T10:00:00Z',
   },
   {
     id: 'cat-2',
     name: 'Lehengas',
     slug: 'lehengas',
     description: 'Opulent skirts adorned with zardozi, mirror work, and resham embroidery.',
-    image:
+    image_url:
       'https://images.pexels.com/photos/25811178/pexels-photo-25811178.jpeg?auto=compress&cs=tinysrgb&h=650&w=940',
-    product_count: 32,
+    sort_order: 2,
+    created_at: '2026-08-01T10:00:00Z',
+    updated_at: '2026-08-01T10:00:00Z',
   },
   {
     id: 'cat-3',
     name: 'Anarkalis',
     slug: 'anarkalis',
     description: 'Floor-length silhouettes that flow with regal fluidity.',
-    image:
+    image_url:
       'https://images.pexels.com/photos/30703860/pexels-photo-30703860.jpeg?auto=compress&cs=tinysrgb&h=650&w=940',
-    product_count: 26,
+    sort_order: 3,
+    created_at: '2026-08-01T10:00:00Z',
+    updated_at: '2026-08-01T10:00:00Z',
   },
   {
     id: 'cat-4',
     name: 'Bridal Couture',
     slug: 'bridal-couture',
     description: 'Heirloom pieces crafted for the once-in-a-lifetime celebration.',
-    image:
+    image_url:
       'https://images.pexels.com/photos/14840508/pexels-photo-14840508.jpeg?auto=compress&cs=tinysrgb&h=650&w=940',
-    product_count: 18,
+    sort_order: 4,
+    created_at: '2026-08-01T10:00:00Z',
+    updated_at: '2026-08-01T10:00:00Z',
   },
   {
     id: 'cat-5',
     name: 'Kurtis & Suits',
     slug: 'kurtis-suits',
     description: 'Everyday elegance with traditional craftsmanship.',
-    image:
+    image_url:
       'https://images.pexels.com/photos/7176438/pexels-photo-7176438.jpeg?auto=compress&cs=tinysrgb&h=650&w=940',
-    product_count: 54,
+    sort_order: 5,
+    created_at: '2026-08-01T10:00:00Z',
+    updated_at: '2026-08-01T10:00:00Z',
   },
   {
     id: 'cat-6',
     name: 'Dupattas & Stoles',
     slug: 'dupattas-stoles',
     description: 'The finishing flourish — Phulkari, Banarasi, and hand-painted.',
-    image:
+    image_url:
       'https://images.pexels.com/photos/8886963/pexels-photo-8886963.jpeg?auto=compress&cs=tinysrgb&h=650&w=940',
-    product_count: 21,
+    sort_order: 6,
+    created_at: '2026-08-01T10:00:00Z',
+    updated_at: '2026-08-01T10:00:00Z',
   },
 ];
 
-export const products: Product[] = [
+export const products: ProductRow[] = [
   {
     id: 'prod-001',
     name: 'Rani Burgundy Banarasi Silk Saree',
@@ -66,11 +78,9 @@ export const products: Product[] = [
       "A regal Banarasi silk saree in deep burgundy, woven with gold zari motifs. Each thread tells a story of Varanasi's master weavers.",
     price: 28900,
     compare_at_price: 36000,
-    category: 'Sarees',
+    category_id: 'cat-1',
     collection: 'Bridal',
     fabric: 'Silk',
-    color: 'Burgundy',
-    size: ['Free Size'],
     images: [
       'https://images.pexels.com/photos/2723623/pexels-photo-2723623.jpeg?auto=compress&cs=tinysrgb&h=650&w=940',
       'https://images.pexels.com/photos/36951188/pexels-photo-36951188.jpeg?auto=compress&cs=tinysrgb&h=650&w=940',
@@ -81,6 +91,7 @@ export const products: Product[] = [
     review_count: 127,
     tags: ['Bestseller', 'Handwoven'],
     created_at: '2026-08-15T10:00:00Z',
+    updated_at: '2026-08-15T10:00:00Z',
   },
   {
     id: 'prod-002',
@@ -90,11 +101,9 @@ export const products: Product[] = [
       'A breathtaking bridal lehenga in sindoor red, featuring intricate gold zardozi embroidery and a hand-embellished dupatta.',
     price: 125000,
     compare_at_price: 158000,
-    category: 'Bridal Couture',
+    category_id: 'cat-4',
     collection: 'Bridal',
     fabric: 'Velvet',
-    color: 'Red',
-    size: ['XS', 'S', 'M', 'L', 'XL'],
     images: [
       'https://images.pexels.com/photos/25811178/pexels-photo-25811178.jpeg?auto=compress&cs=tinysrgb&h=650&w=940',
       'https://images.pexels.com/photos/8596205/pexels-photo-8596205.jpeg?auto=compress&cs=tinysrgb&h=650&w=940',
@@ -105,6 +114,7 @@ export const products: Product[] = [
     review_count: 89,
     tags: ['Bridal Exclusive', 'Custom Fit'],
     created_at: '2026-08-20T10:00:00Z',
+    updated_at: '2026-08-20T10:00:00Z',
   },
   {
     id: 'prod-003',
@@ -114,11 +124,9 @@ export const products: Product[] = [
       'A flowing teal chiffon saree with delicate resham floral embroidery along the pallu. Effortless grace for festive gatherings.',
     price: 14500,
     compare_at_price: null,
-    category: 'Sarees',
+    category_id: 'cat-1',
     collection: 'Festive',
     fabric: 'Chiffon',
-    color: 'Teal',
-    size: ['Free Size'],
     images: [
       'https://images.pexels.com/photos/7176438/pexels-photo-7176438.jpeg?auto=compress&cs=tinysrgb&h=650&w=940',
       'https://images.pexels.com/photos/2723623/pexels-photo-2723623.jpeg?auto=compress&cs=tinysrgb&h=650&w=940',
@@ -129,6 +137,7 @@ export const products: Product[] = [
     review_count: 64,
     tags: ['New Arrival'],
     created_at: '2026-09-01T10:00:00Z',
+    updated_at: '2026-09-01T10:00:00Z',
   },
   {
     id: 'prod-004',
@@ -138,11 +147,9 @@ export const products: Product[] = [
       'A vibrant pink lehenga adorned with hand-stitched mirror work and gota patti detailing. A celebration in every fold.',
     price: 67000,
     compare_at_price: 82000,
-    category: 'Lehengas',
+    category_id: 'cat-2',
     collection: 'Festive',
     fabric: 'Georgette',
-    color: 'Pink',
-    size: ['XS', 'S', 'M', 'L'],
     images: [
       'https://images.pexels.com/photos/12411113/pexels-photo-12411113.jpeg?auto=compress&cs=tinysrgb&h=650&w=940',
       'https://images.pexels.com/photos/13039870/pexels-photo-13039870.jpeg?auto=compress&cs=tinysrgb&h=650&w=940',
@@ -153,6 +160,7 @@ export const products: Product[] = [
     review_count: 52,
     tags: ['Festive Special'],
     created_at: '2026-08-25T10:00:00Z',
+    updated_at: '2026-08-25T10:00:00Z',
   },
   {
     id: 'prod-005',
@@ -162,11 +170,9 @@ export const products: Product[] = [
       'A floor-length maroon anarkali in premium velvet with gold sequin detailing. Regal silhouette for evening occasions.',
     price: 38500,
     compare_at_price: 45000,
-    category: 'Anarkalis',
+    category_id: 'cat-3',
     collection: 'Heritage',
     fabric: 'Velvet',
-    color: 'Maroon',
-    size: ['S', 'M', 'L', 'XL'],
     images: [
       'https://images.pexels.com/photos/2531734/pexels-photo-2531734.jpeg?auto=compress&cs=tinysrgb&h=650&w=940',
       'https://images.pexels.com/photos/30703860/pexels-photo-30703860.jpeg?auto=compress&cs=tinysrgb&h=650&w=940',
@@ -177,6 +183,7 @@ export const products: Product[] = [
     review_count: 38,
     tags: ['Heritage'],
     created_at: '2026-08-10T10:00:00Z',
+    updated_at: '2026-08-10T10:00:00Z',
   },
   {
     id: 'prod-006',
@@ -186,11 +193,9 @@ export const products: Product[] = [
       'A luminous ivory organza saree with hand-painted floral motifs and a scalloped gold border. Contemporary heritage.',
     price: 22000,
     compare_at_price: null,
-    category: 'Sarees',
+    category_id: 'cat-1',
     collection: 'Contemporary',
     fabric: 'Organza',
-    color: 'Ivory',
-    size: ['Free Size'],
     images: [
       'https://images.pexels.com/photos/19567863/pexels-photo-19567863.jpeg?auto=compress&cs=tinysrgb&h=650&w=940',
       'https://images.pexels.com/photos/30703860/pexels-photo-30703860.jpeg?auto=compress&cs=tinysrgb&h=650&w=940',
@@ -201,6 +206,7 @@ export const products: Product[] = [
     review_count: 73,
     tags: ['New Arrival', 'Bestseller'],
     created_at: '2026-09-05T10:00:00Z',
+    updated_at: '2026-09-05T10:00:00Z',
   },
   {
     id: 'prod-007',
@@ -210,11 +216,9 @@ export const products: Product[] = [
       'A masterpiece of bridal couture — deep red velvet with hand-embroidered gold zardozi, sequins, and pearl detailing.',
     price: 185000,
     compare_at_price: null,
-    category: 'Bridal Couture',
+    category_id: 'cat-4',
     collection: 'Bridal',
     fabric: 'Velvet',
-    color: 'Red',
-    size: ['XS', 'S', 'M', 'L', 'XL'],
     images: [
       'https://images.pexels.com/photos/14840508/pexels-photo-14840508.jpeg?auto=compress&cs=tinysrgb&h=650&w=940',
       'https://images.pexels.com/photos/11746622/pexels-photo-11746622.jpeg?auto=compress&cs=tinysrgb&h=650&w=940',
@@ -225,6 +229,7 @@ export const products: Product[] = [
     review_count: 41,
     tags: ['Bridal Exclusive', 'Made to Order'],
     created_at: '2026-08-18T10:00:00Z',
+    updated_at: '2026-08-18T10:00:00Z',
   },
   {
     id: 'prod-008',
@@ -234,11 +239,9 @@ export const products: Product[] = [
       'A golden brocade lehenga with traditional buti motifs and a contrast burgundy border. Festive opulence redefined.',
     price: 89000,
     compare_at_price: 110000,
-    category: 'Lehengas',
+    category_id: 'cat-2',
     collection: 'Heritage',
     fabric: 'Brocade',
-    color: 'Gold',
-    size: ['S', 'M', 'L', 'XL'],
     images: [
       'https://images.pexels.com/photos/13204677/pexels-photo-13204677.jpeg?auto=compress&cs=tinysrgb&h=650&w=940',
       'https://images.pexels.com/photos/13124449/pexels-photo-13124449.jpeg?auto=compress&cs=tinysrgb&h=650&w=940',
@@ -249,6 +252,7 @@ export const products: Product[] = [
     review_count: 29,
     tags: ['Heritage'],
     created_at: '2026-07-28T10:00:00Z',
+    updated_at: '2026-07-28T10:00:00Z',
   },
   {
     id: 'prod-009',
@@ -258,11 +262,9 @@ export const products: Product[] = [
       'A breathable cotton kurti with authentic Lucknowi chikankari hand embroidery. Everyday elegance, elevated.',
     price: 4800,
     compare_at_price: 6500,
-    category: 'Kurtis & Suits',
+    category_id: 'cat-5',
     collection: 'Contemporary',
     fabric: 'Cotton',
-    color: 'White',
-    size: ['XS', 'S', 'M', 'L', 'XL'],
     images: [
       'https://images.pexels.com/photos/30703860/pexels-photo-30703860.jpeg?auto=compress&cs=tinysrgb&h=650&w=940',
       'https://images.pexels.com/photos/19567863/pexels-photo-19567863.jpeg?auto=compress&cs=tinysrgb&h=650&w=940',
@@ -273,6 +275,7 @@ export const products: Product[] = [
     review_count: 156,
     tags: ['Bestseller', 'Hand Embroidered'],
     created_at: '2026-09-03T10:00:00Z',
+    updated_at: '2026-09-03T10:00:00Z',
   },
   {
     id: 'prod-010',
@@ -282,11 +285,9 @@ export const products: Product[] = [
       'A sheer net dupatta in deep maroon with scattered sequin work and a heavily embroidered border.',
     price: 6500,
     compare_at_price: null,
-    category: 'Dupattas & Stoles',
+    category_id: 'cat-6',
     collection: 'Festive',
     fabric: 'Net',
-    color: 'Maroon',
-    size: ['Free Size'],
     images: [
       'https://images.pexels.com/photos/8886963/pexels-photo-8886963.jpeg?auto=compress&cs=tinysrgb&h=650&w=940',
       'https://images.pexels.com/photos/8886965/pexels-photo-8886965.jpeg?auto=compress&cs=tinysrgb&h=650&w=940',
@@ -297,6 +298,7 @@ export const products: Product[] = [
     review_count: 22,
     tags: ['New Arrival'],
     created_at: '2026-09-07T10:00:00Z',
+    updated_at: '2026-09-07T10:00:00Z',
   },
   {
     id: 'prod-011',
@@ -306,11 +308,9 @@ export const products: Product[] = [
       'An emerald green georgette anarkali with silver zari floral embroidery. A versatile piece for celebrations.',
     price: 32000,
     compare_at_price: 40000,
-    category: 'Anarkalis',
+    category_id: 'cat-3',
     collection: 'Festive',
     fabric: 'Georgette',
-    color: 'Green',
-    size: ['S', 'M', 'L', 'XL'],
     images: [
       'https://images.pexels.com/photos/28405815/pexels-photo-28405815.jpeg?auto=compress&cs=tinysrgb&h=650&w=940',
       'https://images.pexels.com/photos/7176438/pexels-photo-7176438.jpeg?auto=compress&cs=tinysrgb&h=650&w=940',
@@ -321,6 +321,7 @@ export const products: Product[] = [
     review_count: 34,
     tags: ['Festive Special'],
     created_at: '2026-08-22T10:00:00Z',
+    updated_at: '2026-08-22T10:00:00Z',
   },
   {
     id: 'prod-012',
@@ -330,11 +331,9 @@ export const products: Product[] = [
       'A breezy spring chiffon saree in blush pink with silver thread work along the pallu. Light, luminous, effortless.',
     price: 12500,
     compare_at_price: 16000,
-    category: 'Sarees',
+    category_id: 'cat-1',
     collection: 'Spring-Summer',
     fabric: 'Chiffon',
-    color: 'Pink',
-    size: ['Free Size'],
     images: [
       'https://images.pexels.com/photos/32982848/pexels-photo-32982848.jpeg?auto=compress&cs=tinysrgb&h=650&w=940',
       'https://images.pexels.com/photos/32982934/pexels-photo-32982934.jpeg?auto=compress&cs=tinysrgb&h=650&w=940',
@@ -345,9 +344,11 @@ export const products: Product[] = [
     review_count: 47,
     tags: ['Spring-Summer'],
     created_at: '2026-09-08T10:00:00Z',
+    updated_at: '2026-09-08T10:00:00Z',
   },
 ];
 
 export function formatPrice(price: number): string {
   return `₹${price.toLocaleString('en-IN')}`;
 }
+

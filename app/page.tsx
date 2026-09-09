@@ -1,4 +1,4 @@
-import { AnnouncementBar, Navbar } from '@/components/store/Navbar';
+import { AnnouncementBar } from '@/components/store/Navbar';
 import { Hero } from '@/components/store/Hero';
 import { FeaturedProducts } from '@/components/store/FeaturedProducts';
 import { CategoriesSection } from '@/components/store/CategoriesSection';
@@ -9,14 +9,13 @@ export default function Home() {
   return (
     <>
       <AnnouncementBar />
-      <Navbar searchQuery="" onSearchChange={() => {}} />
-      <main>
+      <StorefrontClient>
         <Hero />
         <FeaturedProducts />
         <CategoriesSection />
-        <StorefrontClient />
-      </main>
+      </StorefrontClient>
       <Footer />
     </>
   );
 }
+

@@ -19,6 +19,7 @@ import { Badge } from '@/components/ui/badge';
 import type { ProductWithRelations, VariantWithInventory } from '@/lib/types';
 import { formatPrice } from '@/lib/queries';
 import { cn } from '@/lib/utils';
+import { useCart } from '@/lib/cart-context';
 
 const SIZE_ORDER = ['XS', 'S', 'M', 'L', 'XL', 'Free Size'];
 
@@ -44,6 +45,7 @@ export function ProductDetail({
 }: {
   product: ProductWithRelations;
 }) {
+  const { addToCart, setIsCartOpen } = useCart();
   const variants = product.variants;
 
   const colors = useMemo(
@@ -123,10 +125,14 @@ export function ProductDetail({
     setQuantity(1);
   };
 
-  const handleAddToCart = () => {
-    if (!canAddToCart) return;
+  const handleAddToCart = async () => {
+    if (!canAddToCart || !selectedVariant) return;
     setAddedToCart(true);
-    setTimeout(() => setAddedToCart(false), 3000);
+    const success = await addToCart(selectedVariant, product, quantity);
+    if (success) {
+      setIsCartOpen(true);
+    }
+    setTimeout(() => setAddedToCart(false), 2000);
   };
 
   return (
