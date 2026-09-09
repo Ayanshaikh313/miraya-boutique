@@ -40,6 +40,8 @@ export const metadata: Metadata = {
   },
 };
 
+import { AIChatDrawer } from '@/components/ai/AIChatDrawer';
+
 export default function RootLayout({
   children,
 }: {
@@ -51,6 +53,7 @@ export default function RootLayout({
         <AuthProvider>
           <CartProvider>
             {children}
+            <AIChatDrawer />
             <Toaster position="bottom-right" richColors />
           </CartProvider>
         </AuthProvider>

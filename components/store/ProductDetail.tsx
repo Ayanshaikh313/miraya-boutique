@@ -527,6 +527,26 @@ export function ProductDetail({
             </p>
           )}
 
+          {/* Ask Mirāya Assistant Action */}
+          <div className="mt-4 pt-3 border-t border-gold/15">
+            <button
+              onClick={() => {
+                window.dispatchEvent(
+                  new CustomEvent('open-ai-chat', {
+                    detail: {
+                      productId: product.id,
+                      initialQuery: `Is "${product.name}" available in size M?`,
+                    },
+                  })
+                );
+              }}
+              className="w-full bg-gold/10 hover:bg-gold/20 border border-gold/40 text-brown font-serif-display text-sm py-2.5 px-4 rounded-sm flex items-center justify-center gap-2 transition-colors group"
+            >
+              <Sparkles className="h-4 w-4 text-gold-dark group-hover:rotate-12 transition-transform" />
+              <span>Ask Mirāya Assistant about this piece</span>
+            </button>
+          </div>
+
           <Separator className="my-7 bg-gold/15" />
 
           {/* Trust badges */}
