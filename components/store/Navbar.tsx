@@ -2,7 +2,7 @@
 
 import { useState, useEffect } from 'react';
 import Link from 'next/link';
-import { Search, ShoppingBag, Heart, User, Menu, X } from 'lucide-react';
+import { Search, ShoppingBag, Heart, User, Menu, X, Sparkles } from 'lucide-react';
 import { Button } from '@/components/ui/button';
 import { Input } from '@/components/ui/input';
 import {
@@ -181,6 +181,16 @@ export function Navbar({
             <Button variant="ghost" size="icon" className="md:hidden text-brown">
               <Search className="h-5 w-5" />
             </Button>
+
+            {/* AI Assistant Pill in Navbar */}
+            <button
+              onClick={() => window.dispatchEvent(new CustomEvent('open-ai-chat'))}
+              className="hidden sm:flex items-center gap-1.5 px-3 py-1.5 rounded-full bg-gold/10 hover:bg-gold/20 border border-gold/40 text-brown font-serif-display text-xs transition-colors group mr-1"
+              aria-label="Open AI Assistant"
+            >
+              <Sparkles className="h-3.5 w-3.5 text-gold-dark group-hover:rotate-12 transition-transform" />
+              <span>Mirāya AI</span>
+            </button>
 
             <Button variant="ghost" size="icon" className="text-brown hover:text-burgundy hidden sm:flex">
               <Heart className="h-5 w-5" />

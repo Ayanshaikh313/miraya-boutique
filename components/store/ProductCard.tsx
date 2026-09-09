@@ -1,5 +1,6 @@
 'use client';
 
+import { useState } from 'react';
 import Link from 'next/link';
 import { Heart, Star } from 'lucide-react';
 import { type ProductRow } from '@/lib/types';
@@ -13,6 +14,10 @@ export function ProductCard({
   product: ProductRow;
   index?: number;
 }) {
+  const [imgSrc, setImgSrc] = useState(
+    product.images[0] || 'https://images.unsplash.com/photo-1610030469983-98e550d6193c?w=800&auto=format&fit=crop&q=80'
+  );
+
   const discount = product.compare_at_price
     ? Math.round(
         ((Number(product.compare_at_price) - Number(product.price)) /
@@ -20,8 +25,6 @@ export function ProductCard({
           100
       )
     : 0;
-
-  const image = product.images[0] ?? '';
 
   return (
     <div
@@ -36,8 +39,13 @@ export function ProductCard({
         className="block relative aspect-[3/4] overflow-hidden bg-ivory-200"
       >
         <img
-          src={image}
+          src={imgSrc}
           alt={product.name}
+          onError={() =>
+            setImgSrc(
+              'https://images.unsplash.com/photo-1610030469983-98e550d6193c?w=800&auto=format&fit=crop&q=80'
+            )
+          }
           className="h-full w-full object-cover transition-transform duration-700 group-hover:scale-105"
         />
 
