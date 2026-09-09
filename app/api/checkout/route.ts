@@ -7,6 +7,7 @@ export async function POST(request: Request) {
     const {
       cartId,
       sessionId,
+      userId,
       customer,
       shippingAddress,
       couponCode,
@@ -256,6 +257,7 @@ export async function POST(request: Request) {
     const { data: createdOrder, error: orderErr } = await supabase
       .from('orders')
       .insert({
+        user_id: userId || null,
         order_number: orderNumber,
         status: 'confirmed',
         subtotal: officialSubtotal,

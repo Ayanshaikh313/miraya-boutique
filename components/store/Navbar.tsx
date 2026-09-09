@@ -13,6 +13,16 @@ import {
 } from '@/components/ui/sheet';
 import { supabase } from '@/lib/supabase-client';
 import type { CategoryRow } from '@/lib/types';
+import {
+  DropdownMenu,
+  DropdownMenuContent,
+  DropdownMenuItem,
+  DropdownMenuLabel,
+  DropdownMenuSeparator,
+  DropdownMenuTrigger,
+} from '@/components/ui/dropdown-menu';
+import { useAuth } from '@/lib/auth-context';
+import { AuthModal } from './AuthModal';
 import { CartDrawer } from './CartDrawer';
 
 const navLinks = [
@@ -40,6 +50,7 @@ export function Navbar({
 }) {
   const [mobileOpen, setMobileOpen] = useState(false);
   const [categories, setCategories] = useState<CategoryRow[]>([]);
+  const { user, profile, setIsAuthModalOpen, signOut } = useAuth();
 
   useEffect(() => {
     async function fetchCategories() {
@@ -87,6 +98,26 @@ export function Navbar({
                         </Link>
                       </SheetClose>
                     ))}
+                    {user ? (
+                      <SheetClose asChild>
+                        <Link
+                          href="/account"
+                          className="px-4 py-3 text-sm text-burgundy hover:bg-gold/10 transition-colors rounded-sm font-semibold tracking-wide"
+                        >
+                          My Account
+                        </Link>
+                      </SheetClose>
+                    ) : (
+                      <button
+                        onClick={() => {
+                          setMobileOpen(false);
+                          setIsAuthModalOpen(true);
+                        }}
+                        className="text-left px-4 py-3 text-sm text-burgundy hover:bg-gold/10 transition-colors rounded-sm font-semibold tracking-wide"
+                      >
+                        Sign In / Register
+                      </button>
+                    )}
                   </nav>
                   <div className="border-t border-gold/20 pt-4 mt-auto">
                     <p className="px-4 text-xs text-muted-foreground uppercase tracking-widest mb-3">
@@ -155,13 +186,52 @@ export function Navbar({
               <Heart className="h-5 w-5" />
             </Button>
 
-            <Button variant="ghost" size="icon" className="text-brown hover:text-burgundy hidden sm:flex">
-              <User className="h-5 w-5" />
-            </Button>
+            {/* User Account / Auth Trigger */}
+            {user ? (
+              <DropdownMenu>
+                <DropdownMenuTrigger asChild>
+                  <Button variant="ghost" size="icon" className="text-burgundy hover:text-burgundy-dark relative">
+                    <User className="h-5 w-5" />
+                    <span className="absolute top-1.5 right-1.5 h-2 w-2 rounded-full bg-emerald-600" />
+                  </Button>
+                </DropdownMenuTrigger>
+                <DropdownMenuContent align="end" className="w-56 bg-ivory border-gold/20">
+                  <DropdownMenuLabel className="font-normal">
+                    <p className="text-sm font-semibold text-burgundy leading-tight">
+                      {profile?.full_name || 'Valued Customer'}
+                    </p>
+                    <p className="text-xs text-muted-foreground truncate">{user.email}</p>
+                  </DropdownMenuLabel>
+                  <DropdownMenuSeparator className="bg-gold/15" />
+                  <DropdownMenuItem asChild className="cursor-pointer text-brown hover:text-burgundy">
+                    <Link href="/account">My Account & Orders</Link>
+                  </DropdownMenuItem>
+                  <DropdownMenuSeparator className="bg-gold/15" />
+                  <DropdownMenuItem
+                    onClick={() => signOut()}
+                    className="cursor-pointer text-red-700 hover:text-red-900 font-medium"
+                  >
+                    Sign Out
+                  </DropdownMenuItem>
+                </DropdownMenuContent>
+              </DropdownMenu>
+            ) : (
+              <Button
+                variant="ghost"
+                size="icon"
+                onClick={() => setIsAuthModalOpen(true)}
+                className="text-brown hover:text-burgundy"
+                aria-label="Sign In"
+              >
+                <User className="h-5 w-5" />
+              </Button>
+            )}
 
             <CartDrawer />
           </div>
         </div>
+
+        <AuthModal />
 
         {/* Mobile search bar */}
         <div className="md:hidden pb-4">

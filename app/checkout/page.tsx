@@ -1,6 +1,6 @@
 'use client';
 
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import Link from 'next/link';
 import {
   ShoppingBag,
@@ -21,10 +21,12 @@ import { Label } from '@/components/ui/label';
 import { Separator } from '@/components/ui/separator';
 import { RadioGroup, RadioGroupItem } from '@/components/ui/radio-group';
 import { useCart } from '@/lib/cart-context';
+import { useAuth } from '@/lib/auth-context';
 import { formatPrice } from '@/lib/queries';
 import type { OrderRow } from '@/lib/types';
 
 export default function CheckoutPage() {
+  const { user, profile } = useAuth();
   const {
     cartItems,
     cartId,
@@ -42,10 +44,21 @@ export default function CheckoutPage() {
 
   // Form State
   const [customer, setCustomer] = useState({
-    name: '',
-    email: '',
-    phone: '',
+    name: profile?.full_name || '',
+    email: user?.email || '',
+    phone: profile?.phone || '',
   });
+
+  // Auto-fill when auth finishes loading
+  useEffect(() => {
+    if (user || profile) {
+      setCustomer((prev) => ({
+        name: prev.name || profile?.full_name || '',
+        email: prev.email || user?.email || '',
+        phone: prev.phone || profile?.phone || '',
+      }));
+    }
+  }, [user, profile]);
 
   const [address, setAddress] = useState({
     address: '',
@@ -99,6 +112,7 @@ export default function CheckoutPage() {
         body: JSON.stringify({
           cartId,
           sessionId,
+          userId: user?.id || null,
           customer,
           shippingAddress: address,
           couponCode: appliedCoupon ? appliedCoupon.code : null,
