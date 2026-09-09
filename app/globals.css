@@ -1,0 +1,204 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  :root {
+    /* Ivory base */
+    --background: 40 33% 98%;
+    --foreground: 22 44% 16%;
+
+    /* Cards & surfaces */
+    --card: 40 30% 99%;
+    --card-foreground: 22 44% 16%;
+
+    --popover: 40 30% 99%;
+    --popover-foreground: 22 44% 16%;
+
+    /* Burgundy primary */
+    --primary: 350 56% 27%;
+    --primary-foreground: 40 33% 98%;
+
+    /* Dark brown secondary */
+    --secondary: 22 44% 16%;
+    --secondary-foreground: 40 33% 98%;
+
+    /* Muted gold accent */
+    --accent: 41 42% 56%;
+    --accent-foreground: 22 44% 16%;
+
+    /* Muted tones */
+    --muted: 40 18% 93%;
+    --muted-foreground: 22 15% 45%;
+
+    --destructive: 0 72% 45%;
+    --destructive-foreground: 40 33% 98%;
+
+    --border: 40 15% 87%;
+    --input: 40 15% 87%;
+    --ring: 350 56% 27%;
+
+    --radius: 0.25rem;
+
+    /* Brand color ramps */
+    --ivory: 40 33% 98%;
+    --ivory-50: 40 40% 99%;
+    --ivory-100: 40 33% 97%;
+    --ivory-200: 38 25% 93%;
+
+    --burgundy: 350 56% 27%;
+    --burgundy-light: 350 48% 38%;
+    --burgundy-dark: 350 62% 18%;
+
+    --gold: 41 42% 56%;
+    --gold-light: 43 50% 70%;
+    --gold-dark: 39 38% 42%;
+
+    --brown: 22 44% 16%;
+    --brown-light: 22 35% 28%;
+    --brown-dark: 22 50% 10%;
+
+    --chart-1: 350 56% 27%;
+    --chart-2: 41 42% 56%;
+    --chart-3: 22 44% 16%;
+    --chart-4: 40 33% 98%;
+    --chart-5: 350 48% 38%;
+  }
+}
+
+@layer base {
+  * {
+    @apply border-border;
+  }
+  body {
+    @apply bg-background text-foreground;
+    font-feature-settings: "ss01", "ss02";
+  }
+}
+
+@layer utilities {
+  .font-serif-display {
+    font-family: var(--font-cormorant), Georgia, serif;
+  }
+
+  .text-balance {
+    text-wrap: balance;
+  }
+
+  /* Ornamental divider */
+  .ornament-divider {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 0.75rem;
+  }
+  .ornament-divider::before,
+  .ornament-divider::after {
+    content: "";
+    height: 1px;
+    flex: 1;
+    max-width: 80px;
+    background: linear-gradient(
+      to right,
+      transparent,
+      hsl(var(--gold) / 0.5),
+      transparent
+    );
+  }
+
+  /* Gold shimmer text */
+  .text-gold-shimmer {
+    background: linear-gradient(
+      100deg,
+      hsl(39 38% 42%) 0%,
+      hsl(43 55% 68%) 30%,
+      hsl(45 60% 78%) 50%,
+      hsl(43 55% 68%) 70%,
+      hsl(39 38% 42%) 100%
+    );
+    background-size: 200% auto;
+    -webkit-background-clip: text;
+    background-clip: text;
+    -webkit-text-fill-color: transparent;
+    animation: shimmer 6s linear infinite;
+  }
+
+  @keyframes shimmer {
+    to {
+      background-position: 200% center;
+    }
+  }
+
+  /* Fade-in-up animation */
+  .animate-fade-in-up {
+    opacity: 0;
+    transform: translateY(24px);
+    animation: fade-in-up 0.7s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+  }
+
+  @keyframes fade-in-up {
+    to {
+      opacity: 1;
+      transform: translateY(0);
+    }
+  }
+
+  .animate-fade-in {
+    opacity: 0;
+    animation: fade-in 0.6s ease-out forwards;
+  }
+
+  @keyframes fade-in {
+    to {
+      opacity: 1;
+    }
+  }
+
+  /* Scale-in for cards */
+  .animate-scale-in {
+    opacity: 0;
+    transform: scale(0.96);
+    animation: scale-in 0.5s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+  }
+
+  @keyframes scale-in {
+    to {
+      opacity: 1;
+      transform: scale(1);
+    }
+  }
+
+  /* Baroque pattern background */
+  .baroque-bg {
+    background-image: radial-gradient(
+        hsl(var(--gold) / 0.04) 1px,
+        transparent 1px
+      ),
+      radial-gradient(
+        hsl(var(--gold) / 0.04) 1px,
+        transparent 1px
+      );
+    background-size: 24px 24px;
+    background-position: 0 0, 12px 12px;
+  }
+
+  /* Smooth scroll */
+  html {
+    scroll-behavior: smooth;
+  }
+
+  /* Custom scrollbar */
+  ::-webkit-scrollbar {
+    width: 8px;
+  }
+  ::-webkit-scrollbar-track {
+    background: hsl(var(--ivory-200));
+  }
+  ::-webkit-scrollbar-thumb {
+    background: hsl(var(--gold-dark) / 0.4);
+    border-radius: 4px;
+  }
+  ::-webkit-scrollbar-thumb:hover {
+    background: hsl(var(--gold-dark) / 0.6);
+  }
+}
